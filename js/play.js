@@ -8,9 +8,10 @@ var stack = {
     stackTimer: null,
     topStackElement: null,
     maxSpeed: 200,
-    difficulty: 0.02
+    difficulty: 0.01
 };
 var swapWindows = [];
+var swapTimer;
 var sKey;
 var wKey;
 var aKey;
@@ -28,6 +29,8 @@ var playState = {
 
         // stack spawn timer
         stack.stackTimer = game.time.events.loop(stack.secondsTillNewStackElement*1000, playState.spawnStackElement, this);
+        var delay = this.calculateDelay();
+        swapTimer = game.time.events.loop(delay, this.freeSwap, this);
 
         // add keys and listeners
         sKey = game.input.keyboard.addKey(Phaser.Keyboard.S);
@@ -48,7 +51,6 @@ var playState = {
             swapWindows[i].empty = true;
             game.add.text(92+i*200, 130, windows[i]);
         }
-        console.log(swapWindows);
     },
 
     update: function () {
@@ -68,6 +70,7 @@ var playState = {
         stack.spawnedElements++;
         //increase speed of spawning elements
         stack.stackTimer.delay += stack.maxSpeed+(stack.stackTimer.delay-stack.maxSpeed)*Math.pow(Math.E,(-stack.difficulty))-stack.stackTimer.delay;
+        swapTimer.delay = this.calculateDelay();
     },
 
     removeStackElement: function(key, number) {
@@ -83,8 +86,6 @@ var playState = {
                 swapWindows[number].stackImage = game.add.image(x+32, y+62, 'stackElement');
                 swapWindows[number].stackImage.scale.setTo(0.3, 0.3);
                 var delay = this.calculateDelay();
-                console.log(delay);
-                console.log(game.time.events.add(delay, this.freeSwap, this, swapWindows[number]));
             }else{
                 wrongKey = true;
                 this.endGame();
@@ -104,12 +105,15 @@ var playState = {
     },
 
     calculateDelay: function() {
-        return parseInt(((stack.stackTimer.delay*stack.maxStackElements)/4) + Math.random() * (1200 - (-100)) - 100);
+        console.log(parseInt((stack.stackTimer.delay*stack.maxStackElements)/8));
+        return parseInt((stack.stackTimer.delay*stack.maxStackElements)/8);
     },
 
-    freeSwap: function(element) {
-        console.log(element);
-        element.stackImage.destroy();
-        element.empty = true;
+    freeSwap: function() {
+        var element = parseInt(Math.random()*4);
+        if (!swapWindows[element].empty) {
+            swapWindows[element].stackImage.destroy();
+            swapWindows[element].empty = true;
+        }
     }
 };
