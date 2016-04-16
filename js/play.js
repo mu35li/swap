@@ -8,13 +8,14 @@ var stack = {
     stackTimer: null,
     topStackElement: null,
     maxSpeed: 200,
-    difficulty: 0.05
+    difficulty: 0.01
 };
 var swapWindows = [];
 var sKey;
 var wKey;
 var aKey;
 var pKey;
+var wrongKey = false;
 var playState = {
 
     preload: function () {
@@ -85,6 +86,7 @@ var playState = {
                 console.log(delay);
                 console.log(game.time.events.add(delay, this.freeSwap, this, swapWindows[number]));
             }else{
+                wrongKey = true;
                 this.endGame();
             }
         }
@@ -102,7 +104,7 @@ var playState = {
     },
 
     calculateDelay: function() {
-        return parseInt(((stack.stackTimer.delay*stack.maxStackElements)/4) + Math.random() * (2000 - (-200)) - 200);
+        return parseInt(((stack.stackTimer.delay*stack.maxStackElements)/4) + Math.random() * (1200 - (-100)) - 100);
     },
 
     freeSwap: function(element) {
