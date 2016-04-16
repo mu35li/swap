@@ -8,7 +8,7 @@ var stack = {
     stackTimer: null,
     topStackElement: null,
     maxSpeed: 200,
-    difficulty: 0.01
+    difficulty: 0.02
 };
 var swapWindows = [];
 var sKey;
