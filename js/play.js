@@ -8,7 +8,7 @@ var stack = {
     stackTimer: null,
     topStackElement: null,
     maxSpeed: 200,
-    difficulty: 0.01
+    difficulty: 0.05
 };
 var swapWindows = [];
 var sKey;
@@ -102,7 +102,7 @@ var playState = {
     },
 
     calculateDelay: function() {
-        return parseInt(((stack.stackTimer.delay*stack.maxStackElements)/4) + Math.random() * (1500 - (-200)) - 200);
+        return parseInt(((stack.stackTimer.delay*stack.maxStackElements)/4) + Math.random() * (2000 - (-200)) - 200);
     },
 
     freeSwap: function(element) {
