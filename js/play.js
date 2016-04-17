@@ -17,6 +17,7 @@ var wKey;
 var aKey;
 var pKey;
 var wrongKey = false;
+var score = 0;
 var playState = {
 
     preload: function () {
@@ -86,6 +87,8 @@ var playState = {
                 swapWindows[number].stackImage = game.add.image(x+32, y+62, 'stackElement');
                 swapWindows[number].stackImage.scale.setTo(0.3, 0.3);
                 var delay = this.calculateDelay();
+                score+= 10;
+                console.log(score);
             }else{
                 wrongKey = true;
                 this.endGame();
