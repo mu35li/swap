@@ -1,6 +1,11 @@
 var endState = {
 	create: function() {
 		//save highscore in google spreadsheet
+		if ($('#scoreName').val() === "") {
+			scoreName = "anonymous";
+		}else{
+			scoreName = $('#scoreName').val();
+		}
 		
 		$.ajax({
 			url: "https://docs.google.com/forms/d/1YU3szWFC5qiHNuaI2heQpay0zjSxew12hHYs9dnnGS8/formResponse",
