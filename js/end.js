@@ -6,7 +6,7 @@ var endState = {
 			url: "https://docs.google.com/forms/d/1YU3szWFC5qiHNuaI2heQpay0zjSxew12hHYs9dnnGS8/formResponse",
 			method: "POST",
 			data: { 
-				"entry.1602660480": "julian",
+				"entry.1602660480": scoreName,
 				"entry.747868275":score,
 			},
 			dataType: "JSON"

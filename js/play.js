@@ -18,6 +18,7 @@ var aKey;
 var pKey;
 var wrongKey = false;
 var score = 0;
+var scoreName = 0;
 var playState = {
 
     preload: function () {
@@ -81,15 +82,11 @@ var playState = {
                 stack.topStackElement = stack.stackElements.pop();
                 stack.topStackElement.destroy();
                 stack.stackHeight -= stack.heightOfStackElement;
-                swapWindows[number].empty = false;
-                var x = swapWindows[number].image.position.x;
-                var y = swapWindows[number].image.position.y;
-                swapWindows[number].stackImage = game.add.image(x+32, y+62, 'stackElement');
-                swapWindows[number].stackImage.scale.setTo(0.3, 0.3);
-                var delay = this.calculateDelay();
+                //increase score
                 score+= 10;
-                console.log(score);
-            }else{
+                // move top stack element to swap
+                this.fillSwap(number);
+            }else{ // end game on wrong key press
                 wrongKey = true;
                 this.endGame();
             }
@@ -110,6 +107,14 @@ var playState = {
     calculateDelay: function() {
         console.log(parseInt((stack.stackTimer.delay*stack.maxStackElements)/8));
         return parseInt((stack.stackTimer.delay*stack.maxStackElements)/8);
+    },
+
+    fillSwap: function(number) {
+        swapWindows[number].empty = false;
+        var x = swapWindows[number].image.position.x;
+        var y = swapWindows[number].image.position.y;
+        swapWindows[number].stackImage = game.add.image(x+32, y+62, 'stackElement');
+        swapWindows[number].stackImage.scale.setTo(0.3, 0.3);
     },
 
     freeSwap: function() {
