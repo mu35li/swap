@@ -97,7 +97,6 @@ var playState = {
         stack.stackElements = [];
         stack.stackHeight = 0;
         stack.spawnedElements = 0;
-        score = 0;
     },
 
     endGame: function() {

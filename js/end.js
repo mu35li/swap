@@ -33,6 +33,7 @@ var endState = {
 	},
 	
 	startGame: function() {
+		score = 0;
 		game.state.start('play');
 	}
 };
